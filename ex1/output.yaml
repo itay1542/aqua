@@ -1,0 +1,33 @@
+apiVersion: machinelearning
+kind: SeldonDeployment
+metadata:
+  labels:
+    app: seldon
+  name: seldon-deployment-{{workflow.name}}
+  namespace: kubeflow
+spec:
+  annotations:
+    deployment_version: v1
+    project_name: NLP Pipeline
+  name: seldon-deployment-{{workflow.name}}
+  predictors:
+  - annotations:
+      predictor_version: v1
+    componentSpecs:
+    - spec:
+        containers:
+        - image: clean_text_transformer:0.1
+          imagePullPolicy: IfNotPresent
+          name: cleantext
+        - image: bro
+          imagePullPolicy: bro
+          name: bro
+        volumes:
+        - name: mypvc
+          persistentVolumeClaim:
+            claimName: '{{workflow.name}}-my-pvc'
+    graph:
+      children:
+      - endpoint:
+          type: REST
+        name: spacytokenizer
