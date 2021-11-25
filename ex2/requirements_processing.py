@@ -8,7 +8,7 @@ RECURSIVE_REQUIREMENTS_FLAG = "-r"
 
 
 class RequirementsProcessor:
-    def __init__(self, requirements_dir):
+    def     __init__(self, requirements_dir):
         self.__requirements_dir = requirements_dir
         # to prevent circular dependency
         self.__seen_files = []
@@ -28,7 +28,7 @@ class RequirementsProcessor:
     def __get_requirement_string_from_line(self, line):
         if REQUIREMENTS_FILE_TOKEN in line and RECURSIVE_REQUIREMENTS_FLAG in line:
             deep_requirements_file_path = extract_recursive_dependency_path(line)
-            validate_dependency_path(deep_requirements_file_path)
+            validate_dependency_path(deep_requirements_file_path, self.__requirements_dir)
             return self.requirements_file_to_string(deep_requirements_file_path)
         else:
             validate_requirement(line)
