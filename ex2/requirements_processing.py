@@ -19,9 +19,12 @@ class RequirementsProcessor:
             raise CircularDependencyError(F"circular dependency detected for file {file_path}")
         self.__seen_files.append(file_path)
         with open(file_path, 'r') as f:
+            lines = set([])
             while line := f.readline():
                 if line.strip() != '' and line not in lines:
                     requirements.append(self.__get_requirement_string_from_line(line))
+                lines.add(line)
+
         return ','.join(requirements)
 
     def __get_requirement_string_from_line(self, line: str) -> str:
