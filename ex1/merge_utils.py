@@ -9,11 +9,11 @@ def merge_dicts(source: dict, dest: dict):
 def __merge_dicts_in_place(source: dict, dest: dict):
     for key, value in source.items():
         if isinstance(value, dict):
-            deep_val = dest.setdefault(key, {})
-            __merge_dicts_in_place(value, deep_val)
+            deep_value = dest.setdefault(key, {})
+            __merge_dicts_in_place(value, deep_value)
         elif isinstance(value, list):
-            deep_val = dest.setdefault(key, [])
-            __merge_lists_in_place(value, deep_val)
+            deep_value = dest.setdefault(key, [])
+            __merge_lists_in_place(value, deep_value)
         else:
             if dest.setdefault(key, value) != value:
                 dest[key] = [dest[key], value]
@@ -38,10 +38,11 @@ def __merge_lists_in_place(source: list, dest: list):
                     to_append.append(item)
             dest.append(to_append) if len(to_append) > 0 else None
 
+
 def __is_last_hierarchy(target_dict: dict):
     for value in target_dict.values():
         return not isinstance(value, list) and not isinstance(value, dict)
 
 
-def __are_keys_mergeable(source_dict: dict, dest_dict: dict):
-    return set(source_dict.keys()).issubset(dest_dict.keys())
+def __are_keys_mergeable(source: dict, dest: dict):
+    return set(source.keys()).issubset(dest.keys())
