@@ -1,0 +1,8 @@
+spec:
+  predictors:
+  - componentSpecs:
+    - spec:
+        containers:
+        - image: bro
+          imagePullPolicy: bro
+          name: bro
