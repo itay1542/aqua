@@ -1,8 +1,7 @@
-import unittest
 from ex1 import merge_utils
 
 
-class MergeUtilsTests(unittest.TestCase):
+class TestClass():
     def test_merge_of_two_foreign_dicts(self):
         source_dict = {
             "foo": "bar"
@@ -15,7 +14,7 @@ class MergeUtilsTests(unittest.TestCase):
             "bar": "foo"
         }
         output = merge_utils.merge_dicts(source_dict, dest_dict)
-        self.assertEqual(expected, output)
+        assert expected == output
 
     def test_merge_of_deep_nested_objects(self):
         source_dict = {
@@ -41,7 +40,7 @@ class MergeUtilsTests(unittest.TestCase):
             }
         }
         output = merge_utils.merge_dicts(source_dict, dest_dict)
-        self.assertEqual(expected, output)
+        assert expected == output
 
     def test_merge_of_same_key_dicts(self):
         source_dict = {
@@ -67,7 +66,7 @@ class MergeUtilsTests(unittest.TestCase):
             }
         }
         output = merge_utils.merge_dicts(source_dict, dest_dict)
-        self.assertEqual(expected, output)
+        assert expected == output
 
     def test_merge_deep_object_array(self):
         source_dict = {
@@ -196,8 +195,4 @@ class MergeUtilsTests(unittest.TestCase):
             }
         }
         output = merge_utils.merge_dicts(source_dict, dest_dict)
-        self.assertEqual(expected, output)
-
-
-if __name__ == '__main__':
-    unittest.main()
+        assert expected == output
